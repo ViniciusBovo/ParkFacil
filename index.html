@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Park Fácil — Sistema Municipal de Estacionamento Rotativo. Calcule o valor do seu estacionamento de forma rápida e prática.">
+    <title>Park Fácil — Estacionamento Rotativo Municipal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-bar">
+        <div class="container accessibility-bar__inner">
+            <span class="accessibility-bar__label">🏛️ Portal Municipal — Secretaria de Mobilidade Urbana</span>
+            <div class="accessibility-bar__actions">
+                <button id="btn-contrast" class="accessibility-btn" title="Alto contraste">◐ Contraste</button>
+                <button id="btn-font-increase" class="accessibility-btn" title="Aumentar fonte">A+</button>
+                <button id="btn-font-decrease" class="accessibility-btn" title="Diminuir fonte">A-</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Governamental -->
+    <header class="gov-header">
+        <div class="container gov-header__inner">
+            <div class="gov-header__brand">
+                <div class="gov-header__logo">
+                    <span class="gov-header__logo-icon">🅿️</span>
+                </div>
+                <div class="gov-header__text">
+                    <h1 class="gov-header__title">Park Fácil</h1>
+                    <p class="gov-header__subtitle">Sistema Municipal de Estacionamento Rotativo</p>
+                </div>
+            </div>
+            <nav class="gov-header__nav" aria-label="Navegação principal">
+                <a href="#calculadora" class="gov-header__nav-link gov-header__nav-link--active">Calculadora</a>
+                <a href="#tarifas" class="gov-header__nav-link">Tarifas</a>
+                <a href="#contato" class="gov-header__nav-link">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero" id="calculadora">
+        <div class="container">
+            <div class="hero__content">
+                <span class="hero__badge">✅ Serviço Digital</span>
+                <h2 class="hero__heading">Calcule o valor do seu estacionamento</h2>
+                <p class="hero__description">Informe os dados abaixo para obter o valor total a ser pago. Serviço rápido, transparente e 100% digital.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <div class="container main-content__grid">
+
+            <!-- Card do Formulário -->
+            <section class="card card--form" aria-label="Formulário de cálculo">
+                <div class="card__header">
+                    <span class="card__header-icon">🧮</span>
+                    <div>
+                        <h2 class="card__title">Cálculo de Tarifa</h2>
+                        <p class="card__description">Preencha as informações do veículo</p>
+                    </div>
+                </div>
+                <form action="calcular.php" method="post" class="form" id="form-calcular">
+                    <!-- Campo Horas -->
+                    <div class="form__group">
+                        <label for="horas" class="form__label">
+                            <span class="form__label-icon">🕐</span>
+                            Quantidade de Horas
+                        </label>
+                        <input type="number" name="horas" id="horas" class="form__input" min="1" max="24" placeholder="Ex: 3" required>
+                        <span class="form__hint">Mínimo 1 hora, máximo 24 horas</span>
+                    </div>
+
+                    <!-- Campo Veículo -->
+                    <div class="form__group">
+                        <label class="form__label">
+                            <span class="form__label-icon">🚗</span>
+                            Tipo de Veículo
+                        </label>
+                        <div class="form__radio-group">
+                            <label class="form__radio-card" for="veiculo-carro">
+                                <input type="radio" name="veiculo" id="veiculo-carro" value="0" required>
+                                <div class="form__radio-card-content">
+                                    <span class="form__radio-card-icon">🚘</span>
+                                    <span class="form__radio-card-label">Carro</span>
+                                    <span class="form__radio-card-price">R$ 10,00/1ª hora</span>
+                                </div>
+                            </label>
+                            <label class="form__radio-card" for="veiculo-moto">
+                                <input type="radio" name="veiculo" id="veiculo-moto" value="1" required>
+                                <div class="form__radio-card-content">
+                                    <span class="form__radio-card-icon">🏍️</span>
+                                    <span class="form__radio-card-label">Moto</span>
+                                    <span class="form__radio-card-price">R$ 6,00/1ª hora</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Campo Lavagem -->
+                    <div class="form__group">
+                        <label class="form__label">
+                            <span class="form__label-icon">🧽</span>
+                            Serviço Adicional
+                        </label>
+                        <label class="form__checkbox-card" for="lavagem">
+                            <input type="checkbox" name="lavagem" id="lavagem">
+                            <div class="form__checkbox-card-content">
+                                <span class="form__checkbox-card-icon">💧</span>
+                                <div>
+                                    <span class="form__checkbox-card-label">Lavagem Completa</span>
+                                    <span class="form__checkbox-card-price">+ R$ 20,00</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="form__actions">
+                        <button type="submit" class="btn btn--primary" id="btn-calcular">
+                            <span class="btn__icon">📊</span>
+                            Calcular Valor
+                        </button>
+                        <button type="reset" class="btn btn--secondary" id="btn-limpar">
+                            <span class="btn__icon">🔄</span>
+                            Limpar
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Card de Informações -->
+            <aside class="sidebar" id="tarifas">
+                <div class="card card--info">
+                    <div class="card__header">
+                        <span class="card__header-icon">📋</span>
+                        <div>
+                            <h2 class="card__title">Tabela de Tarifas</h2>
+                            <p class="card__description">Valores vigentes</p>
+                        </div>
+                    </div>
+                    <table class="tariff-table">
+                        <thead>
+                            <tr>
+                                <th>Veículo</th>
+                                <th>1ª Hora</th>
+                                <th>Hora Adicional</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🚘 Carro</td>
+                                <td>R$ 10,00</td>
+                                <td>R$ 6,00</td>
+                            </tr>
+                            <tr>
+                                <td>🏍️ Moto</td>
+                                <td>R$ 6,00</td>
+                                <td>R$ 3,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="info-box info-box--highlight">
+                        <span class="info-box__icon">⚠️</span>
+                        <p class="info-box__text">Valor máximo diário: <strong>R$ 50,00</strong> (sem lavagem)</p>
+                    </div>
+                    <div class="info-box">
+                        <span class="info-box__icon">💧</span>
+                        <p class="info-box__text">Lavagem: <strong>R$ 20,00</strong> (cobrada separadamente)</p>
+                    </div>
+                </div>
+
+                <div class="card card--hours">
+                    <div class="card__header">
+                        <span class="card__header-icon">⏰</span>
+                        <div>
+                            <h2 class="card__title">Funcionamento</h2>
+                            <p class="card__description">Horários de operação</p>
+                        </div>
+                    </div>
+                    <ul class="hours-list">
+                        <li class="hours-list__item">
+                            <span class="hours-list__day">Seg. a Sex.</span>
+                            <span class="hours-list__time">07:00 — 22:00</span>
+                        </li>
+                        <li class="hours-list__item">
+                            <span class="hours-list__day">Sábado</span>
+                            <span class="hours-list__time">08:00 — 18:00</span>
+                        </li>
+                        <li class="hours-list__item hours-list__item--closed">
+                            <span class="hours-list__day">Dom. e Feriados</span>
+                            <span class="hours-list__time">Fechado</span>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Rodapé Governamental -->
+    <footer class="gov-footer" id="contato">
+        <div class="container gov-footer__inner">
+            <div class="gov-footer__brand">
+                <span class="gov-footer__logo">🅿️</span>
+                <div>
+                    <strong class="gov-footer__name">Park Fácil</strong>
+                    <p class="gov-footer__tagline">Sistema Municipal de Estacionamento Rotativo</p>
+                </div>
+            </div>
+            <div class="gov-footer__links">
+                <h3 class="gov-footer__heading">Links Úteis</h3>
+                <a href="#" class="gov-footer__link">Política de Privacidade</a>
+                <a href="#" class="gov-footer__link">Termos de Uso</a>
+                <a href="#" class="gov-footer__link">Fale Conosco</a>
+            </div>
+            <div class="gov-footer__contact">
+                <h3 class="gov-footer__heading">Contato</h3>
+                <p class="gov-footer__contact-item">📞 (11) 3000-0000</p>
+                <p class="gov-footer__contact-item">📧 contato@parkfacil.gov.br</p>
+            </div>
+        </div>
+        <div class="gov-footer__bottom">
+            <div class="container">
+                <p>© 2026 Prefeitura Municipal — Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Acessibilidade: Alto Contraste
+        document.getElementById('btn-contrast').addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+        });
+        // Acessibilidade: Aumentar/Diminuir fonte
+        let fontScale = 100;
+        document.getElementById('btn-font-increase').addEventListener('click', () => {
+            fontScale = Math.min(fontScale + 10, 150);
+            document.documentElement.style.fontSize = fontScale + '%';
+        });
+        document.getElementById('btn-font-decrease').addEventListener('click', () => {
+            fontScale = Math.max(fontScale - 10, 80);
+            document.documentElement.style.fontSize = fontScale + '%';
+        });
+    </script>
+</body>
+</html>
